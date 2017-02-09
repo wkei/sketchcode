@@ -123,7 +123,9 @@ export default {
       this.$store.dispatch('addProject')
     },
     distroyProject () {
-      this.$store.dispatch('destroyProject', { id: this.currentProjectId })
+      if (window.confirm('Are you sure to delete this project?')) {
+        this.$store.dispatch('destroyProject', { id: this.currentProjectId })
+      }
     }
   }
 }
