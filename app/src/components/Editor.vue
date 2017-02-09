@@ -51,7 +51,8 @@ export default {
         mode: types[this.type],
         lineWrapping: true,
         theme: 'material',
-        scrollbarStyle: 'overlay'
+        scrollbarStyle: 'overlay',
+        tabSize: 2
       })
       this.$el.querySelector('.CodeMirror-scroll').style.height = this.$el.clientHeight
     },
