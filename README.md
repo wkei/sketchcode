@@ -1,8 +1,8 @@
 # SketchCode
 
-![demo](./screenshot/demo.png)
+![demo](./presskit/demo.png)
 
-![start screen](./screenshot/start.png)
+![start screen](./presskit/start.png)
 
 `Vue` + `Electron` = `<SketchCode/>`
 
@@ -27,3 +27,7 @@ yarn build
 cd ../electron
 yarn package
 ```
+
+=====
+
+<p align="center"><img src="./presskit/icon-s.png"></p>
