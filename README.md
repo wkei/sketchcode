@@ -6,15 +6,22 @@
 
 `Vue` + `Electron` = `<SketchCode/>`
 
-## Development
+## Development in browser
 
 ```
 cd app
 yarn
 yarn dev
+```
+
+## Test application
+
+```
+cd app
+yarn
+yarn build
 
 cd ../electron
-yarn
 yarn start
 ```
 
@@ -25,7 +32,7 @@ cd app
 yarn build
 
 cd ../electron
-yarn package
+yarn build
 ```
 
 =====

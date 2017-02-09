@@ -12,7 +12,6 @@
   "dependencies": {
     "codemirror": "^5.23.0",
     "lodash": "^4.17.4",
-    "mousetrap": "^1.6.0",
     "normalize.css": "^5.0.0",
     "vue": "^2.1.0",
     "vuex": "^2.1.1"
