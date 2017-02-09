@@ -1,8 +1,12 @@
 # SketchCode
 
-`vue` + `electron`
+![demo](./screenshot/demo.png)
 
-## development
+![start screen](./screenshot/start.png)
+
+`Vue` + `Electron` = `<SketchCode/>`
+
+## Development
 
 ```
 cd app
@@ -14,7 +18,7 @@ yarn
 yarn start
 ```
 
-## production (tested on macOS only)
+## Production (tested on macOS only)
 
 ```
 cd app
