@@ -7,15 +7,15 @@
         :code="currentProject.html"
         :currentProjectId="currentProjectId"
         @updateCode="updateCode">
-        <div class="row-resizer" @mousedown="resizeEditor($event, 'html', 'css')"></div>
+        <div class="row-resizer" @mousedown="resizeEditor($event, 'html', 'style')"></div>
       </Editor>
       <Editor
-        type="css"
-        :height="height.css"
-        :code="currentProject.css"
+        type="style"
+        :height="height.style"
+        :code="currentProject.style"
         :currentProjectId="currentProjectId"
         @updateCode="updateCode">
-        <div class="row-resizer" @mousedown="resizeEditor($event, 'css', 'js')"></div>
+        <div class="row-resizer" @mousedown="resizeEditor($event, 'style', 'js')"></div>
       </Editor>
       <Editor
         type="js"
@@ -43,7 +43,7 @@ export default {
       minHeight: 50,
       height: {
         html: 0,
-        css: 0,
+        style: 0,
         js: 0
       }
     }

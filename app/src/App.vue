@@ -98,10 +98,10 @@ export default {
     },
     initShortcut () {
       document.addEventListener('keydown', this.shortcutKeydown, false)
-      // document.addEventListener('keyup', this.shortcutKeyup, false)
+      document.addEventListener('keyup', this.shortcutKeyup, false)
       let iframeDoc = this.$refs.previewRef.$el.querySelector('iframe').contentDocument
       iframeDoc.addEventListener('keydown', this.shortcutKeydown, false)
-      // iframeDoc.addEventListener('keyup', this.shortcutKeyup, false)
+      iframeDoc.addEventListener('keyup', this.shortcutKeyup, false)
     },
     shortcutKeydown (e) {
       if (e.keyCode === 91) {
@@ -110,16 +110,12 @@ export default {
           (e.keyCode === 78 && process.env.NODE_ENV === 'production' ||
            e.keyCode === 75 && process.env.NODE_ENV !== 'production')) {
         this.newProject()
-        this.commandKey = false
       } else if (this.commandKey && e.keyCode === 8) {
         this.distroyProject()
-        this.commandKey = false
-      } else {
-        this.commandKey = false
       }
     },
     shortcutKeyup (e) {
-      // this.commandKey = false
+      this.commandKey = false
     },
     newProject () {
       this.$store.dispatch('addProject')
@@ -128,6 +124,7 @@ export default {
       if (window.confirm('Are you sure to delete this project?')) {
         this.$store.dispatch('destroyProject', { id: this.currentProjectId })
       }
+      this.commandKey = false
     }
   }
 }

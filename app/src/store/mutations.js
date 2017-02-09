@@ -27,7 +27,7 @@ function addProject (state) {
     id: 'p_' + timestamp,
     name: 'Untitled',
     html: '',
-    css: '',
+    style: '',
     js: '',
     created_at: timestamp,
     modified_at: timestamp

@@ -1,6 +1,6 @@
 <template>
   <div :class="'editor editor-' + type" :style="{height: height + 'px'}">
-    <div class="type">{{ type }}</div>
+    <div class="type">{{ typeName }}</div>
     <div class="inputarea" @keyup="update"></div>  
     <slot></slot>
   </div>
@@ -16,7 +16,6 @@ import 'codemirror/mode/css/css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/scroll/simplescrollbars.css'
 import 'codemirror/addon/scroll/simplescrollbars'
-
 import _ from 'lodash'
 import filters from '../filters/'
 
@@ -35,6 +34,16 @@ export default {
       this.initCode()
     }
   },
+  computed: {
+    typeName () {
+      let names = {
+        html: 'html',
+        style: 'css',
+        js: 'js'
+      }
+      return names[this.type]
+    }
+  },
   mounted () {
     this.initEditor()
     this.initCode()
@@ -43,9 +52,10 @@ export default {
     initEditor () {
       let types = {
         html: 'htmlmixed',
-        css: 'css',
+        style: 'css',
         js: 'javascript'
       }
+      console.log(types[this.type])
       this.codeMirror = CodeMirror(this.$el.querySelector('.inputarea'), {
         lineNumbers: true,
         mode: types[this.type],
@@ -135,7 +145,7 @@ export default {
   }
 }
 
-.editor-html, .editor-css {
+.editor-html, .editor-style {
   border-bottom: 2px solid rgba(45, 59, 66, .7);
 }
 </style>

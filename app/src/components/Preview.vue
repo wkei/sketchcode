@@ -21,7 +21,7 @@ export default {
         if (value && oldValue) {
           if (value.html === oldValue.html &&
             value.js === value.js &&
-            value.css !== value.css) {
+            value.style !== value.style) {
             this.updateStyle()
           } else {
             this.update()
@@ -49,14 +49,14 @@ export default {
       let style = document.createElement('style')
       style.type = 'text/css'
       style.id = this.currentProject.id + '_style'
-      style.textContent = this.currentProject.css
+      style.textContent = this.currentProject.style
       doc.body.appendChild(script)
       doc.body.appendChild(style)
     },
     updateStyle () {
       let doc = this.$refs.previewRef.contentDocument
       let style = doc.getElementById(this.currentProject.id + '_style')
-      style.textContent = this.currentProject.css
+      style.textContent = this.currentProject.style
     },
     cleanPreview () {
       let doc = this.$refs.previewRef.contentDocument
