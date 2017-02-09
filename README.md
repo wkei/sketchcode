@@ -30,4 +30,4 @@ yarn package
 
 =====
 
-<p align="center"><img src="./presskit/icon-s.png"></p>
+<p align="center"><img src="./presskit/icon.png"></p>
