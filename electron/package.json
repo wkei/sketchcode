@@ -1,0 +1,24 @@
+{
+  "name": "sketchcode",
+  "version": "1.0.0",
+  "description": "An offline jsfiddle/codepen/jsbin like mac client",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "export NODE_ENV=production && electron-packager ./ SketchCode --overwrite --icon=./SketchCode.icns --ignore=./node_modules "
+  },
+  "repository": "https://github.com/keinn89/SketchCode",
+  "keywords": [
+    "Electron"
+  ],
+  "author": "keinn89",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-packager": "^8.5.1",
+    "electron-shortcut-loader": "^0.4.0"
+  },
+  "dependencies": {
+    "electron-debug": "^1.1.0"
+  }
+}
