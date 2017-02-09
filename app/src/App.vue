@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <ProjectList :width="width.projectList">
+    <ProjectList :style="projectListWidth" :class="{transition: !moving}">
       <div class="resizer" @mousedown="resize($event, 'projectList')"></div>
     </ProjectList>
-    <EditorWrapper ref="EditorWrapperRef" :width="width.editor">
-      <div class="resizer" @mousedown="resize($event, 'editor')"></div>
+    <EditorWrapper :style="editorWrapperWidth" :class="{transition: !moving}">
+      <div class="resizer" @mousedown="resize($event, 'editorWrapper')"></div>
     </EditorWrapper>
     <Preview ref="previewRef">
       <div class="mask" v-show="moving"></div>
     </Preview>
-    <div id="tips" :style="tipsStyle" v-show="!hasProject">
+    <div id="tips" class="transition" :style="tipsStyle" v-show="!hasProject">
       <ul>
+        <li><b>⌘ + /</b> to toggle sidebar</li>
         <li><b v-if="dev">⌘ + K</b><b v-else>⌘ + N</b> to create a new project</li>
         <li><b>⌘ + Del</b> to delete current project</li>
         <li><b>Double Click</b> project title to rename</li>
@@ -30,14 +31,15 @@ export default {
   name: 'app',
   data () {
     return {
-      winWdith: 0,
-      minWidth: 100,
+      winWidth: 0,
+      minWidth: 50,
       width: {
         projectList: 200,
-        editor: 400
+        projectListHolder: 0,
+        editorWrapper: 400
       },
       moving: false,
-      count: 0
+      hideProjectList: false
     }
   },
   components: {
@@ -50,6 +52,16 @@ export default {
       'currentProjectId',
       'projectCount'
     ]),
+    projectListWidth () {
+      return {
+        width: this.width.projectList + 'px'
+      }
+    },
+    editorWrapperWidth () {
+      return {
+        width: this.width.editorWrapper + 'px'
+      }
+    },
     dev () {
       return window.location.protocol === 'http:'
     },
@@ -63,7 +75,7 @@ export default {
     }
   },
   created () {
-    this.winWdith = window.innerWidth
+    this.winWidth = window.innerWidth
     window.addEventListener('resize', this.handleResize)
   },
   mounted () {
@@ -71,20 +83,20 @@ export default {
   },
   methods: {
     handleResize () {
-      this.winWdith = window.innerWidth
+      this.winWidth = window.innerWidth
     },
     resize (e, target) {
       this.cleanMouseEvent()
       let clickX = e.clientX
       let currW = this.width[target]
-      let otherWidth = this.width[target === 'editor' ? 'projectList' : 'editor']
+      let otherWidth = this.width[target === 'editorWrapper' ? 'projectList' : 'editorWrapper']
       this.moving = true
       window.onmousemove = (e) => {
         let moveX = e.clientX - clickX
         if (currW + moveX < this.minWidth) {
           this.width[target] = this.minWidth
-        } else if (this.winWdith - (currW + moveX) - otherWidth < this.minWidth) {
-          this.width[target] = this.winWdith - this.minWidth - otherWidth
+        } else if (this.winWidth - (currW + moveX) - otherWidth < this.minWidth) {
+          this.width[target] = this.winWidth - this.minWidth - otherWidth
         } else {
           this.width[target] = currW + moveX
         }
@@ -112,6 +124,8 @@ export default {
         this.newProject()
       } else if (this.commandKey && e.keyCode === 8) {
         this.distroyProject()
+      } else if (this.commandKey && e.keyCode === 191) {
+        this.toggleProjectList()
       }
     },
     shortcutKeyup (e) {
@@ -121,10 +135,21 @@ export default {
       this.$store.dispatch('addProject')
     },
     distroyProject () {
-      if (window.confirm('Are you sure to delete this project?')) {
+      if (window.confirm('Are you sure to delete current project?')) {
         this.$store.dispatch('destroyProject', { id: this.currentProjectId })
       }
       this.commandKey = false
+    },
+    toggleProjectList () {
+      if (this.width.projectList === 0) {
+        this.width.projectList = this.width.projectListHolder
+        if (this.winWidth - this.width.projectList - this.width.editorWrapper < this.minWidth) {
+          this.width.editorWrapper = this.winWidth - this.width.projectList - this.minWidth
+        }
+      } else {
+        this.width.projectListHolder = this.width.projectList
+        this.width.projectList = 0
+      }
     }
   }
 }
@@ -132,7 +157,6 @@ export default {
 
 <style lang="scss">
 @import './style/share';
-
 * {
   box-sizing: border-box;
   -webkit-user-select: none;
@@ -142,6 +166,9 @@ export default {
 input, textarea {
   -webkit-user-select: text;
   user-select: text;
+}
+.transition {
+  transition: all .3s
 }
 html, body {
   height: 100%;

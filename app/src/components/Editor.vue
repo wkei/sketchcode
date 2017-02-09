@@ -1,7 +1,7 @@
 <template>
   <div :class="'editor editor-' + type" :style="{height: height + 'px'}">
     <div class="type">{{ typeName }}</div>
-    <div class="inputarea" @keyup="update"></div>  
+    <div class="inputarea"></div>  
     <slot></slot>
   </div>
 </template>
@@ -47,6 +47,7 @@ export default {
   mounted () {
     this.initEditor()
     this.initCode()
+    this.initChange()
   },
   methods: {
     initEditor () {
@@ -55,7 +56,6 @@ export default {
         style: 'css',
         js: 'javascript'
       }
-      console.log(types[this.type])
       this.codeMirror = CodeMirror(this.$el.querySelector('.inputarea'), {
         lineNumbers: true,
         mode: types[this.type],
@@ -69,9 +69,14 @@ export default {
     initCode () {
       this.setCodeMirrorValue(this.code)
     },
-    update: _.debounce(function () {
-      this.$emit('updateCode', this.type, this.codeMirror.getValue().trim())
-    }, 300),
+    initChange () {
+      this.codeMirror.on('change', _.debounce(() => {
+        let newValue = this.codeMirror.getValue().trim()
+        if (newValue !== this.code) {
+          this.$emit('updateCode', this.type, newValue)
+        }
+      }, 300))
+    },
     setCodeMirrorValue (val) {
       this.codeMirror.getDoc().setValue(val)
     }

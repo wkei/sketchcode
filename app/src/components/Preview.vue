@@ -10,6 +10,13 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Preview',
+  data () {
+    return {
+      html: '',
+      style: '',
+      js: ''
+    }
+  },
   computed: {
     ...mapGetters([
       'currentProject'
@@ -17,29 +24,22 @@ export default {
   },
   watch: {
     currentProject: {
-      handler (value, oldValue) {
-        if (value && oldValue) {
-          if (value.html === oldValue.html &&
-            value.js === value.js &&
-            value.style !== value.style) {
-            this.updateStyle()
-          } else {
-            this.update()
-          }
-        } else if (value) {
+      handler (val) {
+        if (!val) return false
+        if (val.html === this.html &&
+          val.js === this.js &&
+          val.style !== this.style) {
+          this.updateStyle()
+        } else if (val.html !== this.html || val.js !== this.js) {
           this.update()
         }
       },
       deep: true
     }
   },
-  mounted () {
-    if (this.currentProject) {
-      this.update()
-    }
-  },
   methods: {
     update () {
+      console.log('update')
       let doc = this.$refs.previewRef.contentDocument
       doc.body.innerHTML = this.currentProject.html
       let script = document.createElement('script')
@@ -52,11 +52,16 @@ export default {
       style.textContent = this.currentProject.style
       doc.body.appendChild(script)
       doc.body.appendChild(style)
+      this.style = this.currentProject.style
+      this.html = this.currentProject.html
+      this.js = this.currentProject.js
     },
     updateStyle () {
+      console.log('updateStyle')
       let doc = this.$refs.previewRef.contentDocument
       let style = doc.getElementById(this.currentProject.id + '_style')
       style.textContent = this.currentProject.style
+      this.style = this.currentProject.style
     },
     cleanPreview () {
       let doc = this.$refs.previewRef.contentDocument

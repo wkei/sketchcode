@@ -1,5 +1,5 @@
 <template>
-  <div id="project-list" :style="projectListWidth">
+  <div id="project-list">
     <h1 class="logo">&lt;SketchCode/&gt;</h1>
     <div class="list">
       <div class="inner">
@@ -33,11 +33,6 @@ export default {
     ]),
     sortedProjects () {
       return this.projects.slice().sort((a, b) => b.modified_at - a.modified_at)
-    },
-    projectListWidth () {
-      return {
-        width: this.width + 'px'
-      }
     }
   }
 }
@@ -54,6 +49,7 @@ export default {
   width: 200px;
   background: $projectListBg;
   cursor: default;
+  transform-origin: 0 0;
   .logo {
     padding: 15px 20px;
     margin: 0;
