@@ -20,6 +20,7 @@ exports.load = (appUrl) => {
     }
     
     mainWindow = new BrowserWindow(options)
+    mainWindow.maximize()
     mainWindow.loadURL(appUrl)
     mainWindow.focus()
   })

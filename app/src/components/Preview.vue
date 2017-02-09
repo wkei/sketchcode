@@ -37,9 +37,13 @@ export default {
       deep: true
     }
   },
+  mounted () {
+    if (this.currentProject) {
+      this.update()
+    }
+  },
   methods: {
     update () {
-      console.log('update')
       let doc = this.$refs.previewRef.contentDocument
       doc.body.innerHTML = this.currentProject.html
       let script = document.createElement('script')
