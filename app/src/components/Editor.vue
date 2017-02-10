@@ -75,7 +75,7 @@ export default {
         if (newValue !== this.code) {
           this.$emit('updateCode', this.type, newValue)
         }
-      }, 300))
+      }, 600))
     },
     setCodeMirrorValue (val) {
       this.codeMirror.getDoc().setValue(val)

@@ -44,7 +44,8 @@ export default {
   },
   methods: {
     update () {
-      let doc = this.$refs.previewRef.contentDocument
+      let preview = this.$refs.previewRef
+      let doc = preview.contentDocument
       doc.body.innerHTML = this.currentProject.html
       let script = document.createElement('script')
       script.type = 'text/javascript'
@@ -61,8 +62,8 @@ export default {
       this.js = this.currentProject.js
     },
     updateStyle () {
-      console.log('updateStyle')
-      let doc = this.$refs.previewRef.contentDocument
+      let preview = this.$refs.previewRef
+      let doc = preview.contentDocument
       let style = doc.getElementById(this.currentProject.id + '_style')
       style.textContent = this.currentProject.style
       this.style = this.currentProject.style
@@ -91,11 +92,12 @@ export default {
   }
 }
 #preview {
-  width: 100%;
-  height: 100%;
-  position: relative;
   height: 100%;
   width: 100%;
+}
+#preview > iframe {
+  width: 100%;
+  height: 100%;
   border: none;
   overflow: auto;
 }

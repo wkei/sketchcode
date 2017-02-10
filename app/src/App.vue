@@ -111,9 +111,9 @@ export default {
     initShortcut () {
       document.addEventListener('keydown', this.shortcutKeydown, false)
       document.addEventListener('keyup', this.shortcutKeyup, false)
-      let iframeDoc = this.$refs.previewRef.$el.querySelector('iframe').contentDocument
-      iframeDoc.addEventListener('keydown', this.shortcutKeydown, false)
-      iframeDoc.addEventListener('keyup', this.shortcutKeyup, false)
+      // let iframeDoc = this.$refs.previewRef.$el.querySelector('iframe').contentDocument
+      // iframeDoc.addEventListener('keydown', this.shortcutKeydown, false)
+      // iframeDoc.addEventListener('keyup', this.shortcutKeyup, false)
     },
     shortcutKeydown (e) {
       if (e.keyCode === 91) {
