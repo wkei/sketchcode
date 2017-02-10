@@ -14,7 +14,7 @@ yarn
 yarn dev
 ```
 
-## Test application
+## Test app
 
 ```
 cd app
@@ -25,14 +25,19 @@ cd ../electron
 yarn start
 ```
 
-## Production (tested on macOS only)
+## Production
+
+- Tested on macOS Sierra & win7
+- Install relatived libiaries base on error log
 
 ```
 cd app
 yarn build
 
 cd ../electron
-yarn build
+yarn build-mac
+yarn build-win
+yarn build-linux
 ```
 
 =====
