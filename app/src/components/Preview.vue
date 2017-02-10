@@ -1,6 +1,6 @@
 <template>
   <div id="preview-wrapper">
-    <iframe id="preview" ref="previewRef"></iframe>
+    <div id="preview" ref="previewRef"></div>
     <slot></slot>
   </div>
 </template>
@@ -45,7 +45,10 @@ export default {
   methods: {
     update () {
       let preview = this.$refs.previewRef
-      let doc = preview.contentDocument
+      let frame = document.createElement('iframe')
+      preview.innerHTML = ''
+      preview.appendChild(frame)
+      let doc = frame.contentDocument
       doc.body.innerHTML = this.currentProject.html
       let script = document.createElement('script')
       script.type = 'text/javascript'
@@ -62,8 +65,8 @@ export default {
       this.js = this.currentProject.js
     },
     updateStyle () {
-      let preview = this.$refs.previewRef
-      let doc = preview.contentDocument
+      let frame = this.$refs.previewRef.querySelector('iframe')
+      let doc = frame.contentDocument
       let style = doc.getElementById(this.currentProject.id + '_style')
       style.textContent = this.currentProject.style
       this.style = this.currentProject.style
