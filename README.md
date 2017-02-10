@@ -1,12 +1,12 @@
 # SketchCode
 
+An offline JSFiddle/CodePen/JSBin like desktop app powered by Vue + Electron
+
 ![demo](./presskit/demo.png)
 
 ![start screen](./presskit/start.png)
 
-`Vue` + `Electron` = `<SketchCode/>`
-
-## Development in browser
+## Develop in browser
 
 ```
 cd app
@@ -25,10 +25,10 @@ cd ../electron
 yarn start
 ```
 
-## Production
+## Package
 
 - Tested on macOS Sierra & win7
-- Install relatived libiaries base on error log
+- Install libiaries base on terminal log
 
 ```
 cd app
