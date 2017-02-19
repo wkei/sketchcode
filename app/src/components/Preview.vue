@@ -14,7 +14,8 @@ export default {
     return {
       html: '',
       style: '',
-      js: ''
+      js: '',
+      previewSrc: ''
     }
   },
   computed: {
@@ -44,36 +45,34 @@ export default {
   },
   methods: {
     update () {
+      this.html = this.currentProject.html
+      this.style = this.currentProject.style
+      this.js = this.currentProject.js
       let preview = this.$refs.previewRef
-      let frame = document.createElement('iframe')
       preview.innerHTML = ''
+      let frame = document.createElement('iframe')
       preview.appendChild(frame)
-      let doc = frame.contentDocument
-      doc.body.innerHTML = this.currentProject.html
-      let script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.id = this.currentProject.id + '_script'
-      script.textContent = this.currentProject.js
+      let doc = frame.contentWindow.document
       let style = document.createElement('style')
       style.type = 'text/css'
       style.id = this.currentProject.id + '_style'
-      style.textContent = this.currentProject.style
-      doc.body.appendChild(script)
+      style.textContent = this.style
       doc.body.appendChild(style)
-      this.style = this.currentProject.style
-      this.html = this.currentProject.html
-      this.js = this.currentProject.js
+      let script = document.createElement('script')
+      script.id = this.currentProject.id + '_script'
+      script.textContent = this.js
+      doc.open()
+      doc.write(this.html || '<!DOCTYPE html><html><head><title></title></head><body></body></html>')
+      doc.write(style.outerHTML)
+      doc.write(script.outerHTML)
+      doc.close()
     },
     updateStyle () {
+      this.style = this.currentProject.style
       let frame = this.$refs.previewRef.querySelector('iframe')
       let doc = frame.contentDocument
       let style = doc.getElementById(this.currentProject.id + '_style')
       style.textContent = this.currentProject.style
-      this.style = this.currentProject.style
-    },
-    cleanPreview () {
-      let doc = this.$refs.previewRef.contentDocument
-      doc.body.innerHTML = ''
     }
   }
 }

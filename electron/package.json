@@ -1,6 +1,6 @@
 {
   "name": "sketchcode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An offline jsfiddle/codepen/jsbin like mac client",
   "productName": "SketchCode",
   "main": "main.js",
@@ -19,6 +19,7 @@
   "devDependencies": {
     "asar": "^0.13.0",
     "electron": "^1.4.15",
-    "electron-packager": "^8.5.1"
+    "electron-packager": "^8.5.1",
+    "electron-builder": "^13.9.0"
   }
 }
