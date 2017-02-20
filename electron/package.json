@@ -10,11 +10,11 @@
     "build-win": "export NODE_ENV=production && node build.js win",
     "build-linux": "export NODE_ENV=production && node build.js linux"
   },
-  "repository": "https://github.com/keinn89/SketchCode",
+  "repository": "https://github.com/qingww/SketchCode",
   "keywords": [
     "Electron"
   ],
-  "author": "keinn89",
+  "author": "qingww",
   "license": "CC0-1.0",
   "devDependencies": {
     "asar": "^0.13.0",
