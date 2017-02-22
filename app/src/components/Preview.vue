@@ -12,6 +12,7 @@ export default {
   name: 'Preview',
   data () {
     return {
+      currentProjectId: '',
       html: '',
       style: '',
       js: '',
@@ -29,9 +30,11 @@ export default {
         if (!val) return false
         if (val.html === this.html &&
           val.js === this.js &&
+          val.id === this.currentProjectId &&
           val.style !== this.style) {
           this.updateStyle()
-        } else if (val.html !== this.html || val.js !== this.js) {
+        // } else if (val.html !== this.html || val.js !== this.js) {
+        } else {
           this.update()
         }
       },
@@ -45,6 +48,7 @@ export default {
   },
   methods: {
     update () {
+      this.currentProjectId = this.currentProject.id
       this.html = this.currentProject.html
       this.style = this.currentProject.style
       this.js = this.currentProject.js
@@ -57,7 +61,6 @@ export default {
       style.type = 'text/css'
       style.id = this.currentProject.id + '_style'
       style.textContent = this.style
-      doc.body.appendChild(style)
       let script = document.createElement('script')
       script.id = this.currentProject.id + '_script'
       script.textContent = this.js
