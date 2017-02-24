@@ -6,6 +6,31 @@ An offline JSFiddle/CodePen/JSBin like desktop app powered by Vue + Electron
 
 ![start screen](./presskit/start.png)
 
+## Injected Plugins
+
+#### Vue
+
+```html
+<div id="app">
+  {{ message }}
+</div>
+```
+
+```javascript
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+```
+
+#### Holder.js
+
+```html
+<img src="holder.js/300x200?bg=f1faff">
+```
+
 ## Develop in browser
 
 ```

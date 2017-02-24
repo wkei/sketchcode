@@ -1,6 +1,7 @@
 var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var projectRoot = path.resolve(__dirname, '../')
 
 var env = process.env.NODE_ENV
@@ -48,7 +49,7 @@ module.exports = {
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules/
+        exclude: [/node_modules/, /src\/assets/]
       }
     ],
     loaders: [
@@ -62,8 +63,19 @@ module.exports = {
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules/
+        exclude: [/node_modules/, /src\/assets/]
       },
+      // {
+      //   test: /\.js$/,
+      //   loader: 'file',
+      //   include: [
+      //     path.join(projectRoot, 'src/assets/libs')
+      //   ],
+      //   query: {
+      //     limit: 10000,
+      //     name: utils.assetsPath('libs/[name].[ext]')
+      //   }
+      // },
       {
         test: /\.json$/,
         loader: 'json'
@@ -96,5 +108,10 @@ module.exports = {
         browsers: ['last 2 versions']
       })
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './src/assets', to: 'assets' },
+    ])
+  ]
 }

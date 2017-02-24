@@ -7,6 +7,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import _ from 'lodash'
 
 export default {
   name: 'Preview',
@@ -48,6 +49,7 @@ export default {
   },
   methods: {
     update () {
+      console.log('update')
       this.currentProjectId = this.currentProject.id
       this.html = this.currentProject.html
       this.style = this.currentProject.style
@@ -64,18 +66,31 @@ export default {
       let script = document.createElement('script')
       script.id = this.currentProject.id + '_script'
       script.textContent = this.js
+      let libs = this.injectLibs()
       doc.open()
       doc.write(this.html || '<!DOCTYPE html><html><head><title></title></head><body></body></html>')
+      doc.write(libs)
       doc.write(style.outerHTML)
       doc.write(script.outerHTML)
       doc.close()
     },
     updateStyle () {
+      console.log('updateStyle')
       this.style = this.currentProject.style
       let frame = this.$refs.previewRef.querySelector('iframe')
       let doc = frame.contentDocument
       let style = doc.getElementById(this.currentProject.id + '_style')
       style.textContent = this.currentProject.style
+    },
+    injectLibs () {
+      let assetsPath = 'assets/libs/'
+      let jsAssets = ['vue.min.js', 'holder.min.js']
+      let libs = _.reduce(jsAssets, (libs, asset) => {
+        let script = document.createElement('script')
+        script.src = assetsPath + asset
+        return libs + script.outerHTML
+      }, '')
+      return libs
     }
   }
 }
