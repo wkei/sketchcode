@@ -6,6 +6,11 @@ An offline JSFiddle/CodePen/JSBin like desktop app powered by Vue + Electron
 
 ![start screen](./presskit/start.png)
 
+## Download Links
+
+- [macOS](https://github.com/keiww/SketchCode/releases/download/v1.0.2/SketchCode-darwin-x64.zip)
+- [win32 64bit](https://github.com/keiww/SketchCode/releases/download/v1.0.2/SketchCode-win32-64bit.zip)
+
 ## Injected Plugins
 
 #### Vue
