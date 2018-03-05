@@ -1,6 +1,6 @@
 # SketchCode
 
-**WPA (Progressive Web App) version is HERE [https://github.com/keiww/sketch]([https://github.com/keiww/sketch]) **
+**WPA (Progressive Web App) version is HERE [https://github.com/keiww/sketch]([https://github.com/keiww/sketch])**
 
 An offline JSFiddle/CodePen/JSBin like desktop app powered by Vue + Electron
 
