@@ -1,6 +1,6 @@
 # SketchCode
 
-**WPA (Progressive Web App) version is HERE [https://github.com/keiww/sketch]([https://github.com/keiww/sketch])**
+**WPA (Progressive Web App) version is HERE [https://github.com/wkei/sketch]([https://github.com/wkei/sketch])**
 
 An offline JSFiddle/CodePen/JSBin like desktop app powered by Vue + Electron
 
@@ -10,8 +10,8 @@ An offline JSFiddle/CodePen/JSBin like desktop app powered by Vue + Electron
 
 ## Download Links
 
-- [macOS](https://github.com/keiww/SketchCode/releases/download/v1.0.2/SketchCode-darwin-x64.zip)
-- [win32 64bit](https://github.com/keiww/SketchCode/releases/download/v1.0.2/SketchCode-win32-64bit.zip)
+- [macOS](https://github.com/wkei/SketchCode/releases/download/v1.0.2/SketchCode-darwin-x64.zip)
+- [win32 64bit](https://github.com/wkei/SketchCode/releases/download/v1.0.2/SketchCode-win32-64bit.zip)
 
 ## Injected Plugins
 
